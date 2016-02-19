@@ -1,21 +1,56 @@
 <div class="row marketing">
 
-  <input list-as-input
-         ng-model="emails"
+  <input egg-list-as-input="end-with=','"
+         ng-model="sample1"
+         egg-pattern="^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(:[0-9]{1,5})?)$"
          name="emails"
          label="Email list"
-         end-key=","
          type="text"
          placeholder="Email">
-  {{emails}}
+  {{sample1}}
 
-  <input list-as-input
-         ng-model="counter"
-         pattern="^\w+$"
-         label="Counter lists"
-         end-key=";"
+  <input egg-list-as-input=""
+         ng-model="sample2"
+         label="String"
          type="text"
-         placeholder="Size"
-         name="counter">
-  {{counter}}
+         placeholder="String"
+         name="string">
+  {{sample2}}
+
+  <input egg-list-as-input='match="^(\w+\d+)$" end-with=","'
+         ng-model="sample3"
+         label="Login"
+         type="text"
+         placeholder="Login"
+         name="login">
+  {{sample3}}
+
+  <input egg-list-as-input=""
+         egg-pattern="^\d{5}$"
+         ng-model="sample4"
+         name="zipcode"
+         label="Zip Code"
+         type="text"
+         placeholder="ZipCode">
+  {{sample4}}
+
+  <input egg-list-as-input=''
+         egg-end-with=","
+         egg-pattern="^\w+$"
+         ng-model="sample5"
+         label="Heroes"
+         type="text"
+         placeholder="Heroes"
+         name="heroes">
+  {{sample5}}
+
+  <input egg-list-as-input=""
+         egg-values="values6"
+         ng-model="sample6"
+         label="City"
+         type="text"
+         placeholder="City"
+         name="city">
+  {{sample6}}
+
 </div>

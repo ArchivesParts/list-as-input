@@ -10,25 +10,45 @@
 angular.module('listInputApp')
         .controller('MainCtrl', function ($scope)
         {
-            $scope.emails = "super@toto.fr,greg@yahoo.com,sdfg, dsf@lkjk.fr"
-            $scope.counter = "azert;sdfgh;sdfg;gkjfdl";
+            $scope.sample1 = "super@toto.fr,greg@yahoo.com,sdfg, dsf@lkjk.fr"
+            $scope.sample2 = "azert;sdfgh;sdfg;gkjfdl";
+            $scope.sample3 = "greg35,truello22";
+            $scope.sample4 = "35000;61100;35760"
+            $scope.sample5 = "Deadpool,IronMan,SpiderCochon";
+
+            $scope.values6 = ["Rennes", "Vitré", "Fougères", "Gévezé"];
+            $scope.sample6 = "Rennes;Vitré;Fougères";
         })
-        .directive('listAsInput', function ()
+        .directive('eggListAsInput', function ()
         {
             function liController($scope)
             {
                 var self = this;
                 self.entry = "";
-                self.pattern =
-                        "^[-a-z0-9~!$%^&*_=+}{\'?]+(\.[-a-z0-9~!$%^&*_=+}{\'?]+)*@([a-z0-9_][-a-z0-9_]*(\.[-a-z0-9_]+)*\.(aero|arpa|biz|com|coop|edu|gov|info|int|mil|museum|name|net|org|pro|travel|mobi|[a-z][a-z])|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3})(:[0-9]{1,5})?)$"
+                self.pattern = "^.*$"
+
                 self.name = "li-" + Math.floor(Math.random() * 999999999);
                 self.validList = [];
+                self.model = undefined;
 
                 //Validate input
                 self.isValid = function (absolute)
                 {
                     absolute = absolute || false;
-                    var status = (!absolute && self.entry.length === 0) || self.pattern.test(self.entry);
+                    var status = false;
+                    if (self.values) {
+                        if (!absolute && self.entry.length === 0) {
+                            status = true;
+                        } else {
+                            angular.forEach(self.values, function (value)
+                            {
+                                status = status || (self.entry === value);
+                            })
+                        }
+                    } else {
+                        status = (!absolute && self.entry.length === 0) || self.pattern.test(self.entry);
+
+                    }
                     return status;
                 }
 
@@ -56,13 +76,22 @@ angular.module('listInputApp')
 
             function link(scope, element, attrs, controller)
             {
+
+                var expression = attrs.eggListAsInput;
+
+                var patternMatch = expression.match(/match='([^']*)'|match="([^"]*)"/i);
+                var endWithMatch = expression.match(/end-with='([^']*)'|end-with="([^"]*)"/i);
+                var pattern = (patternMatch && (patternMatch[1] || patternMatch[2])) || attrs.eggPattern;
+                var endWith = endWithMatch && (endWithMatch[1] || endWithMatch[2]) || attrs.eggEndWith;
+
+                controller.pattern = new RegExp(pattern || controller.pattern, 'i');
+                controller.endKey = (endWith || ";");
                 controller.input = element;
+                controller.values = scope.eggValues;
                 controller.name = attrs.name || controller.name;
-                controller.pattern = new RegExp(attrs.pattern || controller.pattern, 'i');
                 controller.placeholder = attrs.placeholder;
                 controller.label = attrs.label;
 
-                controller.endKey = (attrs.endKey || ",");
                 var endKeyCode = controller.endKey.charCodeAt(0)
 
                 //Extract initial content from ngModel
@@ -70,10 +99,10 @@ angular.module('listInputApp')
                 var tmpEntries = scope.ngModel.split(controller.endKey);
                 tmpEntries.forEach(function (entry)
                 {
-                    console.log(entry);
-                    entry = entry.trim();
-                    if (controller.pattern.test(entry)) {
+                    controller.entry = entry.trim();
+                    if (controller.isValid(true)) {
                         controller.validList.push(entry);
+                        controller.entry = '';
                     } else {
                         controller.entry = entry;
                     }
@@ -95,6 +124,7 @@ angular.module('listInputApp')
                         return
                     }
                 });
+
             }
 
             return {
@@ -102,6 +132,7 @@ angular.module('listInputApp')
                 restrict: 'AE',
                 scope: {
                     ngModel: "=",
+                    eggValues: "=?",
                 },
                 link: link,
                 replace: true,
