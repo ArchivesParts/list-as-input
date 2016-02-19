@@ -16,6 +16,8 @@ Example with default pattern (ie:string matching) and default separator (ie: ';'
          name="counter">
 ```
 
+Example with custom pattern
+
 ```html
  <input list-input="match="^(\w+\d+)$" end-with=','"
          ng-model="emails"
@@ -26,7 +28,6 @@ Example with default pattern (ie:string matching) and default separator (ie: ';'
 ```
 
 
-Example with custom pattern
 
 ```html
   <input list-input
