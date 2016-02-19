@@ -1,0 +1,21 @@
+<div class="row marketing">
+
+  <input list-as-input
+         ng-model="emails"
+         name="emails"
+         label="Email list"
+         end-key=","
+         type="text"
+         placeholder="Email">
+  {{emails}}
+
+  <input list-as-input
+         ng-model="counter"
+         pattern="^\w+$"
+         label="Counter lists"
+         end-key=";"
+         type="text"
+         placeholder="Size"
+         name="counter">
+  {{counter}}
+</div>
