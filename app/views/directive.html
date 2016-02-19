@@ -4,13 +4,13 @@
        ng-class="{'has-success':ctl.isValid(),'has-error':!ctl.isValid()}">
     <label ng-if="ctl.label"
            class="control-label"
-           for="((::ctl.name}}">{{::ctl.label}}
+           for="((ctl.name}}">{{ctl.label}}
     </label>
     <input ng-model="ctl.entry"
            type="text"
            class="form-control "
-           name="((::ctl.name}}"
-           placeholder="{{::ctl.placeholder}}">
+           name="((ctl.name}}"
+           placeholder="{{ctl.placeholder}}">
     <span class="glyphicon form-control-feedback"
           ng-class="{'glyphicon-ok':ctl.isValid(),'glyphicon-remove':!ctl.isValid()}"
           aria-hidden="true"></span>

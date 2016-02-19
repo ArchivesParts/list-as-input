@@ -1,20 +1,15 @@
 {
   "name": "list-as-input",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": [
     "dist/egg-as-input.min.js"
   ],
   "dependencies": {
-    "angular": "^1.3.0",
-    "angular-animate": "^1.3.0",
-    "angular-cookies": "^1.3.0",
-    "angular-resource": "^1.3.0",
-    "angular-sanitize": "^1.3.0",
-    "angular-touch": "^1.3.0"
+    "bootstrap": "^3.2.0",
+    "angular": "1.2.29"
   },
   "devDependencies": {
-    "bootstrap": "^3.2.0",
-    "angular-mocks": "^1.3.0"
+    "angular-mocks": "1.2.29"
   },
   "appPath": "app",
   "moduleName": "listInputApp",
@@ -22,6 +17,7 @@
     ".gitignore",
     "Gruntfile.js",
     "package.json",
+    "test",
     ".tmp"
   ]
 }
