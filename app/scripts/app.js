@@ -9,10 +9,10 @@
  * Main module of the application.
  */
 angular
-  .module('listInputApp', [
-    'ngAnimate',
-    'ngCookies',
-    'ngResource',
-    'ngSanitize',
-    'ngTouch'
-  ]);
+        .module('eggListInputApp', [
+            'ngAnimate',
+            'ngCookies',
+            'ngResource',
+            'ngSanitize',
+            'ngTouch'
+        ]);

@@ -1,9 +1,19 @@
 # list-as-input
 Angular directive which allow user to add multiple values in a single input
 
+## Install
+
+You can install this package either with bower.
+
+bower
+
+bower install angular
+Then add a <script> to your index.html:
+
+<script src="/bower_components/egg-list-as-input/dist/egg-list-as-input.min.js"></script>
+
 
 ## HTML Usage
-
 
 Example with default pattern (ie:string matching) and default separator (ie: ';')
 
