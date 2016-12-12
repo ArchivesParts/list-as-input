@@ -1,15 +1,15 @@
 {
   "name": "list-as-input",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "main": [
     "dist/egg-as-input.min.js"
   ],
   "dependencies": {
     "bootstrap": "^3.2.0",
-    "angular": "1.2.29"
+    "angular": ">1.2.29"
   },
   "devDependencies": {
-    "angular-mocks": "1.2.29"
+    "angular-mocks": ">1.2.29"
   },
   "appPath": "app",
   "moduleName": "listInputApp",

@@ -14,11 +14,10 @@ angular.module('eggListInputApp')
             {
                 var self = this;
                 self.entry = "";
-                self.pattern = "^.*$"
+                self.pattern = "^.*$";
 
                 self.name = "li-" + Math.floor(Math.random() * 999999999);
                 self.validList = [];
-                self.model = undefined;
 
                 //Validate input
                 self.isValid = function (absolute)
@@ -36,30 +35,37 @@ angular.module('eggListInputApp')
                         }
                     } else {
                         status = (!absolute && self.entry.length === 0) || self.pattern.test(self.entry);
-
                     }
                     return status;
-                }
+                };
 
                 //Reload valid entry in input field
                 self.restoreEntry = function (index)
                 {
                     self.entry = self.validList[index];
                     self.refreshModel();
-                }
+                };
 
                 //Remove entry from valid list by index
                 self.removeEntry = function (index)
                 {
                     self.validList.splice(index, 1);
                     self.refreshModel();
-                }
+                };
 
                 //Refresh model
                 self.refreshModel = function ()
                 {
                     $scope.ngModel = self.validList.join(self.endKey);
-                }
+                };
+                self.updateNgModelOnBlur = function ()
+                {
+                    if (self.isValid() && self.entry !== "") {
+                        self.validList.push(self.entry);
+                        self.entry = '';
+                        self.refreshModel();
+                    }
+                };
 
             }
 
@@ -81,7 +87,7 @@ angular.module('eggListInputApp')
                 controller.placeholder = attrs.placeholder;
                 controller.label = attrs.label;
 
-                var endKeyCode = controller.endKey.charCodeAt(0)
+                var endKeyCode = controller.endKey.charCodeAt(0);
 
                 //Extract initial content from ngModel
                 controller.entry = "";
@@ -110,7 +116,7 @@ angular.module('eggListInputApp')
                             controller.refreshModel();
                         });
                         event.preventDefault();
-                        return
+                        return;
                     }
                 });
 
@@ -121,7 +127,7 @@ angular.module('eggListInputApp')
                 restrict: 'AE',
                 scope: {
                     ngModel: "=",
-                    eggValues: "=?",
+                    eggValues: "=?"
                 },
                 link: link,
                 replace: true,
